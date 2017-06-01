@@ -7,7 +7,7 @@
 
 int menu()
 {
-	Bool BanderaG1 == FALSE, BanderaG2; //Loops de menus
+	Bool BanderaG1 = FALSE, BanderaG2; //Loops de menus
 	Bool BanderaO1, BanderaO2; //Loops de opciones
 	int opcion;
 	
@@ -39,7 +39,7 @@ int menu()
 			
 			case 1:		//Nueva venta
 				
-				banderaG2 = FALSE;
+				BanderaG2 = FALSE;
 				while(!BanderaG2){
 					BanderaO2 = FALSE;
 					while(!BanderaO2){ //Se asegura de que la opción elegida este dentro del rango
@@ -75,6 +75,7 @@ int menu()
 							GeneraVenta();
 							BanderaG1 = TRUE; //Termina el loop general
 							BanderaG2 = TRUE; //Termina el loop del segundo menú
+							return 0;
 							break;
 						case 5:
 							clear();
@@ -106,7 +107,8 @@ int menu()
 
 int main()
 {
-	
-	return 0;
+	int aux;
+	aux = menu();
+	return aux;
 	
 }
