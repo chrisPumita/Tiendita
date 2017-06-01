@@ -15,17 +15,48 @@ void grabaProdudcto(FILE* arch, Producto* reg)
 	fwrite(reg,sizeof(Producto),1,arch);
 }
 
-/*
-
-DesplegasStock()
+void DesplegasStock()
 {
+	FILE* arch = fopen("lista-de-precios.dat","r+");
+	int ID;
+	char barCode[TAM_BAR];
+	char nombre[TAM_MAX];
+	float cUni;
+	int stock;
+
+	fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
+	while(!feof(arch)!= '\0')
+	{
+		printf("%d\t",ID);
+		printf("%s\t",barCode);
+		printf("%s\t",nombre);
+		printf("%.2f\t",cUni);
+		printf("%d\t",stock);
+		printf("\n");
+
+		fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
+	}
+	fclose(arch);
+	
 }
- */
 
 
 int main(int argc, char const *argv[])
 {
+
+	//DesplegasStock();	
 	
+
+
+
+	return 0;
+}
+
+ 
+
+void leerEstructura()
+{
+
 	/*
 	FILE* arch;
 	Producto a;
@@ -51,27 +82,5 @@ int main(int argc, char const *argv[])
 
 	fclose(arch);
 	 */
-
-	FILE* arch = fopen("lista-de-precios.dat","r+");
-	int ID;
-	char barCode[TAM_BAR];
-	char nombre[TAM_MAX];
-	float cUni;
-	int stock;
-
-	fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
-	while(!feof(arch)!= '\0')
-	{
-		printf("%d\t",ID);
-		printf("%s\t",barCode);
-		printf("%s\t",nombre);
-		printf("%.2f\t",cUni);
-		printf("%d\t",stock);
-		printf("\n");
-
-		fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
-	}
-	fclose(arch);
-
-	return 0;
+	
 }
