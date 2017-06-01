@@ -46,7 +46,7 @@ int menu()
 						clear();
 						printf("+---------------+------------------+------------------+-----------------+----------------+\n"); //Segundo Menú
 						printf("| Ver Productos | Agregar Producto | Retirar Producto | Proceder a Pago | Cancelar Venta |\n");
-						printf("|      [1]      |		[2]		   | 		[3]		  |			[4]		|   	 [5]	 |\n");
+						printf("|      [1]      |	 [2]	   | 	    [3]	      |	      [4]	|   	 [5]	 |\n");
 						printf("+---------------+------------------+------------------+-----------------+----------------+\n");
 						printf("Elija una opcion: ");
 						scanf("%d",&opcion);
