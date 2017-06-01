@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "lldblc.h"
 #include "Bool.h"
+#include "lldblc.h"
+#include "Productos.h"
 #define clear() printf("\033[H\033[J") 
 // Para limpiar pantalla
 

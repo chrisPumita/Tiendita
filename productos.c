@@ -23,7 +23,7 @@ void DesplegasStock()
 	char nombre[TAM_MAX];
 	float cUni;
 	int stock;
-	printf("ID\t| CODIGO |  NOMBRE |   $   |  Stock |\n");
+
 	fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
 	while(!feof(arch)!= '\0')
 	{
@@ -45,17 +45,19 @@ int main(int argc, char const *argv[])
 {
 
 	DesplegasStock();	
-	//FILE* arch 
+
+
+
 
 	return 0;
 }
 
  
-	/*
 
 void leerEstructura()
 {
 
+	/*
 	FILE* arch;
 	Producto a;
 
@@ -79,6 +81,6 @@ void leerEstructura()
 	}
 
 	fclose(arch);
+	 */
 	
 }
-	 */
