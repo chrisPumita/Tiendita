@@ -44,8 +44,8 @@ void DesplegasStock()
 int main(int argc, char const *argv[])
 {
 
-	//DesplegasStock();	
-	
+	DesplegasStock();	
+
 
 
 
