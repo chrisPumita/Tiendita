@@ -14,7 +14,7 @@ void grabaProducto(FILE* arch, Producto* reg)
 	fwrite(reg,sizeof(Producto),1,arch);
 }
 
-void DesplegasStock()
+void DesplegarStock()
 {
 	FILE* arch = fopen("lista-de-precios.dat","r+");
 	int ID;
@@ -24,6 +24,7 @@ void DesplegasStock()
 	int stock;
 
 	fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
+	printf("ID  | CODIGO |  N O M B R E    |   $   |  Stock |\n");
 	while(!(feof(arch)!= '\0'))
 	{
 		printf("%d\t",ID);
@@ -39,6 +40,7 @@ void DesplegasStock()
 	
 }
 
+/*
 
 int main(int argc, char const *argv[])
 {
@@ -51,6 +53,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
+ */
  
 
 void leerEstructura()

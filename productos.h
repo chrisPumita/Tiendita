@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include "Bool.h"
 #define TAM_MAX 50
 #define TAM_BAR 20
 

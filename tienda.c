@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "lldblc.h"
-#include "Productos.h"
+#include "productos.h"
 #define clear() printf("\033[H\033[J") 
 // Para limpiar pantalla
 
@@ -10,7 +10,7 @@ int menu()
 	Bool BanderaG1 = FALSE, BanderaG2; //Loops de menus
 	Bool BanderaO1, BanderaO2; //Loops de opciones
 	int opcion;
-	
+	clear();
 	while(!BanderaG1){
 	
 		opcion = 0;
@@ -43,7 +43,7 @@ int menu()
 				while(!BanderaG2){
 					BanderaO2 = FALSE;
 					while(!BanderaO2){ //Se asegura de que la opción elegida este dentro del rango
-						clear();
+						//clear();
 						printf("+---------------+------------------+------------------+-----------------+----------------+\n"); //Segundo Menú
 						printf("| Ver Productos | Agregar Producto | Retirar Producto | Proceder a Pago | Cancelar Venta |\n");
 						printf("|      [1]      |	 [2]	   | 	    [3]	      |	      [4]	|   	 [5]	 |\n");
@@ -63,7 +63,7 @@ int menu()
 					switch(opcion){
 						case 1:
 							clear();
-							//DesplegarStock();
+							DesplegarStock();
 							break;
 						case 2:
 							//AgregarProducto();
@@ -81,7 +81,6 @@ int menu()
 							clear();
 							printf("La venta ha sido cancelada exitosamente\n\n");
 							BanderaG2 = TRUE; //Termina el loop del segundo menú
-							return 0;
 							break;
 						default:
 							return 1;
