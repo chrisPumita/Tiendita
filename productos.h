@@ -17,6 +17,6 @@
 
 void leerProducto(FILE * arch, Producto* reg);
 
-void grabaProdudcto(FILE* arch, Producto* reg);
+void grabaProducto(FILE* arch, Producto* reg);
 
-void DesplegasStock();
+void DesplegarStock();

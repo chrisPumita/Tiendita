@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "productos.h"
-#include "Bool.h"
 #define TAM_MAX 50
 #define TAM_BAR 20
 
@@ -10,7 +9,7 @@ void leerProducto(FILE * arch, Producto* reg)
 	fread(reg,sizeof(Producto),1,arch);
 }
 
-void grabaProdudcto(FILE* arch, Producto* reg)
+void grabaProducto(FILE* arch, Producto* reg)
 {
 	fwrite(reg,sizeof(Producto),1,arch);
 }
@@ -25,7 +24,7 @@ void DesplegasStock()
 	int stock;
 
 	fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
-	while(!feof(arch)!= '\0')
+	while(!(feof(arch)!= '\0'))
 	{
 		printf("%d\t",ID);
 		printf("%s\t",barCode);

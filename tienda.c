@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "Bool.h"
 #include "lldblc.h"
 #include "Productos.h"
 #define clear() printf("\033[H\033[J") 
@@ -64,16 +63,16 @@ int menu()
 					switch(opcion){
 						case 1:
 							clear();
-							DesplegarStock();
+							//DesplegarStock();
 							break;
 						case 2:
-							AgregarProducto();
+							//AgregarProducto();
 							break;
 						case 3:
-							RetirarProducto();
+							//RetirarProducto();
 							break;
 						case 4:
-							GeneraVenta();
+							//GeneraVenta();
 							BanderaG1 = TRUE; //Termina el loop general
 							BanderaG2 = TRUE; //Termina el loop del segundo menú
 							return 0;
@@ -82,8 +81,10 @@ int menu()
 							clear();
 							printf("La venta ha sido cancelada exitosamente\n\n");
 							BanderaG2 = TRUE; //Termina el loop del segundo menú
+							return 0;
 							break;
 						default:
+							return 1;
 							break;
 					}
 				}
@@ -98,10 +99,10 @@ int menu()
 				return 0;
 				break;
 			default:
+				return 1;
 				break;
 		}
 	}
-		
 }
 
  

@@ -6,9 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> 
-
-enum {FALSE = 0, TRUE = !0};
-typedef unsigned int Bool;
+#include "Bool.h"
 
 /*--------- Estructura del NODO ------------*/
  struct Node_Type
