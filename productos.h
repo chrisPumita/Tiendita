@@ -4,7 +4,7 @@
  {
  	int indice;
  	char nombre[TAM_MAX];
- 	char BarCode[TAM_BAR];
+ 	char barCode[TAM_BAR];
  	int stock;
  	double cUni;
  };
