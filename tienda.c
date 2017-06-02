@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h> 
 #include "lldblc.h"
 #include "productos.h"
 #define clear() printf("\033[H\033[J") 
@@ -18,13 +19,15 @@ int menu()
 		BanderaO1 = FALSE;
 		while(!BanderaO1)
 		{ //Se asegura de que la opción elegida este dentro del rango
-			printf("\tPUNTO DE VENTA\n");
-			printf("\n");
-			printf("+------------+-------------+--------+\n"); //Primer Menú
-			printf("|NUEVA VENTA:| ADMINISTRAR | SALIR  |\n");
-			printf("|     [1]    |     [2]     |  [0]   |\n");
-			printf("+------------+-------------+--------+\n");
-			printf("Elija una opcion: ");
+			printf("\E[37;41;5;1;33m\t████████\n");
+			printf("\E[37;41;5m\t  OCXO  \n");
+			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
+			printf("   ->PUNTO DE VENTA\n");
+			printf("\E[1;8m+------------+-------------+--------+\n"); //Primer Menú
+			printf("\E[1;8m|NUEVA VENTA:| ADMINISTRAR | SALIR  |\n");
+			printf("\E[1;8m|     [1]    |     [2]     |  [0]   |\n");
+			printf("\E[1;8m+------------+-------------+--------+\n");
+			printf("\E[0;34mElija una opcion: \E[00m");
 			scanf ("%d", &opcion);
 			if(opcion == 0 || opcion == 1||opcion == 2)
 			{
