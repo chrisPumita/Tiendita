@@ -11,46 +11,53 @@ int menu()
 	Bool BanderaO1, BanderaO2; //Loops de opciones
 	int opcion;
 	clear();
-	while(!BanderaG1){
+	while(!BanderaG1)
+	{
 	
 		opcion = 0;
 		BanderaO1 = FALSE;
-		while(!BanderaO1){ //Se asegura de que la opción elegida este dentro del rango
+		while(!BanderaO1)
+		{ //Se asegura de que la opción elegida este dentro del rango
 			printf("\tPUNTO DE VENTA\n");
 			printf("\n");
-			printf("+------------+--------+\n"); //Primer Menú
-			printf("|NUEVA VENTA:| SALIR  |\n");
-			printf("|     [1]    |  [0]   |\n");
-			printf("+------------+--------+\n");
+			printf("+------------+-------------+--------+\n"); //Primer Menú
+			printf("|NUEVA VENTA:| ADMINISTRAR | SALIR  |\n");
+			printf("|     [1]    |     [2]     |  [0]   |\n");
+			printf("+------------+-------------+--------+\n");
 			printf("Elija una opcion: ");
 			scanf ("%d", &opcion);
-			if(opcion == 0 || opcion == 1){
+			if(opcion == 0 || opcion == 1||opcion == 2)
+			{
 				BanderaO1 = TRUE; //Opcion dentro de rango
 			}
-			else{
+			else
+			{
 				clear();
 				printf("\nOpcion no valida, intente de nuevo\n\n"); //Opcion fuera de rango
 			}
 		}
 		printf("\n");
 		
-		
-		switch(opcion){ //Opciones Primer Menú
+		switch(opcion)
+		{ //Opciones Primer Menú
 			
 			case 1:		//Nueva venta
 				
 				BanderaG2 = FALSE;
-				while(!BanderaG2){
+				while(!BanderaG2)
+				{
 					BanderaO2 = FALSE;
-					while(!BanderaO2){ //Se asegura de que la opción elegida este dentro del rango
+					while(!BanderaO2)
+					{ //Se asegura de que la opción elegida este dentro del rango
 						//clear();
 						printf("+---------------+------------------+------------------+-----------------+----------------+\n"); //Segundo Menú
 						printf("| Ver Productos | Agregar Producto | Retirar Producto | Proceder a Pago | Cancelar Venta |\n");
-						printf("|      [1]      |	 [2]	   | 	    [3]	      |	      [4]	|   	 [5]	 |\n");
+						printf("|      [1]      |      [2]         |      [3]         |       [4]       |      [5]       |\n");
 						printf("+---------------+------------------+------------------+-----------------+----------------+\n");
 						printf("Elija una opcion: ");
 						scanf("%d",&opcion);
-						if(opcion >= 1 && opcion <=5){
+						if(opcion >= 1 && opcion <=5)
+						{
 							BanderaO2 = TRUE; //Opcion dentro de rango
 						}
 						else{
@@ -60,7 +67,8 @@ int menu()
 					}
 				
 			
-					switch(opcion){
+					switch(opcion)
+					{
 						case 1:
 							clear();
 							DesplegarStock();
@@ -91,8 +99,59 @@ int menu()
 				
 				break;
 				
-				
-			case 2: 	//Salir
+			case 2:
+				//Entrar al menu de administracion
+				BanderaG2 = FALSE;
+				while(!BanderaG2)
+				{
+					BanderaO2 = FALSE;
+					while(!BanderaO2)
+					{ //Se asegura de que la opción elegida este dentro del rango
+						//clear();
+						printf("+---------------+----------+-----------+-------------------+\n"); //Segundo Menú
+						printf("| Ver Almacen   | Agregar  | Modificar |  REGRESAR AL MENU |\n");
+						printf("|      [1]      |    [2]   |    [3]    |         [4]       |\n");
+						printf("+---------------+----------+-------+-----------------------+\n");
+						printf("Elija una opcion: ");
+						scanf("%d",&opcion);
+						if(opcion >= 1 && opcion <=4)
+						{
+							BanderaO2 = TRUE; //Opcion dentro de rango
+						}
+						else
+						{
+							clear();
+							printf("\nOpcion no valida, intente de nuevo\n\n"); //Opcion fuera de rango
+						}
+
+						switch(opcion)
+						{
+							case 1:
+								clear();
+								DesplegarStock();
+								break;
+							case 2:
+									printf("Se asgnara ID: %d\n",buscaUltimo());
+									agregaProducto(buscaUltimo());
+									//Agrega nuevo producto
+								break;
+							case 3:
+								//Pide el ID del producto a modificar
+								DesplegarStock();
+								modificarRegistro();
+								break;
+							case 4:
+								clear();
+								BanderaG2 = TRUE; //Termina el loop del segundo menú
+								break;
+							default:
+								return 1;
+								break;
+						}
+					}
+				}
+				break;
+			case 3: 	//Salir
 				printf("\nGracias por su visita, vuelva pronto\n\n");
 				BanderaG1 = TRUE; //Termina el loop general
 				return 0;
@@ -111,5 +170,4 @@ int main()
 	int aux;
 	aux = menu();
 	return aux;
-	
 }
