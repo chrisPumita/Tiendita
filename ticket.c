@@ -79,7 +79,7 @@ void GeneraTicket(LinkedList* this, float pago)
 	printf("\t Cambio:...$%.2f\n",cambio(totPago,pago));
 	printf("\n");
 	printf("    GRACIAS POR SU COMPRA\n");
-	printf("     -------o0o-------\n");
+	printf("     -------o0o-------\n\n\n");
 }
 
 Bool agregaProductoTicket(LinkedList* ticket, char codigoBarra[]){
@@ -136,7 +136,7 @@ int nuevaVenta()
 		printf("|  Quitar Producto | Proceder a Pago | Cancelar Venta |\n");
 		printf("|        [1]       |      [2]        |      [3]       |\n");
 		printf("+---------------+------------------+------------------+\n");
-		printf("Escriba código de barra:\n-->");
+		printf("Escriba la opcion o el código de barra del producto que se quiere agregar:\n-->");
 		scanf("%s",codeBar);
 		int tamCodigo = strlen(codeBar);
 		clear();

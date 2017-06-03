@@ -23,12 +23,12 @@ int menu()
 			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
 			printf("\E[37;41;5m\t  OTZO  \E[00m\n");
 			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
-			printf("   ->PUNTO DE VENTA\n");
-			printf("\E[1;8m+------------+-------------+------------|----------|--------+\n"); //Primer Menú
-			printf("\E[1;8m|NUEVA VENTA:| ADMINISTRAR |  CONSULTA  | CRÉDITOS | SALIR  |\n");
-			printf("\E[1;8m|     [1]    |     [2]     |     [3]    |    [4]   |   [0]  |\n");
-			printf("\E[1;8m+------------+-------------+------------+----------|........|\n");
-			printf("\E[0;34mElija una opcion: \E[00m");
+			printf("   ->PUNTO DE VENTA\n\n");
+			printf("+------------+-------------+------------|----------|--------+\n"); //Primer Menú
+			printf("|NUEVA VENTA:| ADMINISTRAR |  CONSULTA  | CRÉDITOS | SALIR  |\n");
+			printf("|     [1]    |     [2]     |     [3]    |    [4]   |   [0]  |\n");
+			printf("+------------+-------------+------------+----------|........|\n");
+			printf("Elija una opcion: ");
 			scanf ("%d", &opcion);
 			if(opcion == 0 || opcion == 1||opcion == 2||opcion == 3||opcion == 4)
 			{
@@ -63,7 +63,7 @@ int menu()
 						printf("+---------------+----------+-----------+-------------------+\n"); //Segundo Menú
 						printf("| Ver Almacen   | Agregar  | Modificar |  REGRESAR AL MENU |\n");
 						printf("|      [1]      |    [2]   |    [3]    |         [4]       |\n");
-						printf("+---------------+----------+-------+-----------------------+\n");
+						printf("+---------------+----------+-----------+-------------------+\n");
 						printf("Elija una opcion: ");
 						scanf("%d",&opcion);
 						if(opcion >= 1 && opcion <=4)
@@ -81,6 +81,7 @@ int menu()
 							case 1:
 								clear();
 								DesplegarStock();
+								printf("\n\n");
 								break;
 							case 2:
 									//printf("Se asgnara ID: %d\n",buscaUltimo()+1);
@@ -89,6 +90,7 @@ int menu()
 								break;
 							case 3:
 								//Pide el ID del producto a modificar
+								clear();
 								DesplegarStock();
 								modificarRegistro();
 								break;

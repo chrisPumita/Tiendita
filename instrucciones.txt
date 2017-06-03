@@ -1,0 +1,1 @@
+gcc -std=c99 -o PuntoDeVenta.out productos.c tienda.c lista.c ticket.c

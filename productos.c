@@ -17,35 +17,6 @@ void grabaProducto(FILE* arch, Producto* reg)
 	fwrite(reg,sizeof(Producto),1,arch);
 }
 
-/**
- * [DesplegarStock Esta funcion lee archivos txt, se ha eliminado porque se ha creado funciones que leen archivos binarios]
- */
-/*
-void DesplegarStock()
-{
-	FILE* arch = fopen(FILE_NAME,"r+b");
-	int ID;
-	char barCode[TAM_BAR];
-	char nombre[TAM_MAX];
-	float cUni;
-	int stock;
-
-	fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
-	printf("ID  | CODIGO |  N O M B R E    |   $   |  Stock |\n");
-	while(!(feof(arch)!= '\0'))
-	{
-		printf("%d\t",ID);
-		printf("%s\t",barCode);
-		printf("%s\t",nombre);
-		printf("%.2f\t",cUni);
-		printf("%d\t",stock);
-		printf("\n");
-
-		fscanf(arch,"%d %s %s %f %d",&ID,barCode,nombre,&cUni,&stock);
-	}
-	fclose(arch);
-}
- */
 
 Producto creaProducto(int indice, char nombre[], char barCode[], int stock, float cUni)
 {
@@ -228,26 +199,3 @@ void agregaProducto(int indice)
 	fwrite(&reg,sizeof(Producto),1,arch);
 	fclose(arch); 	
  }
- 
-#if 0
-int main(int argc, char const *argv[])
-{
-	
-	DesplegarStock();
-	//Muestra todo el inventario
-	
-
-
-	//Se pide al usuario el ID que vaya a ver
-	int ID;
-	printf("Ingrese el ID para ver información: ->");
-	scanf("%d",&ID);
-	buscaProductoIndex(ID-1);
-
-	
-
-	DesplegarStock();
-
-	return 0;
-}
-#endif
