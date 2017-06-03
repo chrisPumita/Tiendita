@@ -8,7 +8,7 @@
 #define Bool_h
 
 /**
- * Define las variables tipo booleano
+ * 
  */
 enum {FALSE = 0, TRUE = !0};
 typedef unsigned int Bool;

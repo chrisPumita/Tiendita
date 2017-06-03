@@ -3,30 +3,30 @@
 #include "productos.h"
 
 /**
- * [Genera un ticket en pantalla]
- * @param this [Es la dirección de la lista enlazada]
- * @param pago [Es el pago que se hace después de la compra]
+ * [GeneraTicket description]
+ * @param this [description]
+ * @param pago [description]
  */
 void GeneraTicket(LinkedList* this, float pago);
 /**
- * [Agrega un producto al ticket]
- * @param ticket [Es la dirección de la lista enlazada]
+ * [agregaProductoTicket description]
+ * @param ticket [description]
  */
 void agregaProductoTicket(LinkedList* ticket);
 /**
- * [Calcula el cambio]
- * @param  precio [Es el precio total]
- * @param  pago   [Cuanto pago el cliente]
- * @return        [Regresa el cambio]
+ * [cambio description]
+ * @param  precio [description]
+ * @param  pago   [description]
+ * @return        [description]
  */
 float cambio(float precio, float pago);
 /**
- * [Inicia una nueva venta]
- * @return [Determina si se regresa al menu anterior o si termina el programa]
+ * [nuevaVenta description]
+ * @return [description]
  */
 int nuevaVenta();
 /**
- * [Muestra la venta actual]
- * @param this [Es la dirección de la lista enlazada]
+ * [muestraVenta description]
+ * @param this [description]
  */
 void muestraVenta(LinkedList* this);

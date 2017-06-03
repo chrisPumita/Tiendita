@@ -105,6 +105,15 @@ void agregaProductoTicket(LinkedList* ticket){
 	//recupera la informacion
 	int cant = 1; //Esta cambiará
 	
+	/*Buscar el producto en la lista si lo encunetra */
+	Bool nodoFound = LinkedList_FindIf(ticket,n);
+	if (nodoFound)
+	{
+		Node* nodo = LinkedList_Search(ticket,n);
+		printf("ENCONTRO UN ELEMENTO IGUAL\n");
+		cant = nodo->cantidad + 1;
+	}
+
 	LinkedList_Insert(ticket,n,reg.barCode,reg.nombre,cant, reg.cUni,cant*reg.cUni);
 
 	fclose(arch);

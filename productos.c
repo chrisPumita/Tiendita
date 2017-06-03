@@ -79,7 +79,7 @@ Producto ingresaDatosxConsola(int indice)
 	scanf("%f",&cUni);
 
 	Producto x;
-	x.indice = indice+1;
+	x.indice = indice;
 	strcpy(x.nombre, nombre);
 	strcpy(x.barCode, barCode);
 	x.stock = stock;
@@ -119,7 +119,7 @@ void agregaProducto(int indice)
 	FILE* arch=fopen(FILE_NAME,"r+b");
 
 	//Ingresa los datos por consola
-	Producto reg = ingresaDatosxConsola(indice++);
+	Producto reg = ingresaDatosxConsola(indice);
 
 	//Posicion del puntero al final del archivo .dat
 	fseek(arch,0,SEEK_END);
@@ -144,7 +144,6 @@ void agregaProducto(int indice)
  {
 	FILE* arch=fopen(FILE_NAME,"r+b");
 	int n = index;
-
 	//Posiciono el puntero del archivo
 	fseek(arch,n*sizeof(Producto),SEEK_SET);
 
@@ -181,9 +180,8 @@ void agregaProducto(int indice)
 		}
 		index++;
 	}
-	clear();
+	//clear();
 	fclose(arch);
-	printf("%d\n",index);
     if (found != TRUE)
 	{
 		printf("No existe producto: %s\n",bar);
@@ -215,9 +213,9 @@ void agregaProducto(int indice)
 	fclose(arch);
 	if (i<0)
 	{
-		i = 1;
+		i = 0;
 	}
-	i++;
+	//i++;
 	return i;
  }
 
@@ -227,14 +225,15 @@ void agregaProducto(int indice)
 	FILE* arch=fopen(FILE_NAME,"r+b");
 	int n;
 	printf("Ingrese el ID a modificar: ->");
-	fflush(stdout);
 	scanf("%d",&n);
-	n--;
-	printf("Mostrando inforacion del ID: %d\n",n);
-	buscaProductoIndex(n);
+	fflush(stdout);
+	printf("Mostrando información del ID: %d\n",n);
+	
+	buscaProductoIndex(n-1);
+
 	//ingreso los nuevos datos por consola
 	Producto reg = ingresaDatosxConsola(n);
-
+	n--;
 	//Posicion del indentificaro de posicion
 	fseek(arch,n*sizeof(Producto),SEEK_SET);
 

@@ -1,1 +1,2 @@
-lldblc.c ticket.c
+gcc -std=c99 -o tienda productos.c tienda.c lldblc.c ticket.c
+./tienda

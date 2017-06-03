@@ -83,8 +83,8 @@ int menu()
 								DesplegarStock();
 								break;
 							case 2:
-									printf("Se asgnara ID: %d\n",buscaUltimo());
-									agregaProducto(buscaUltimo());
+									printf("Se asgnara ID: %d\n",buscaUltimo()+1);
+									agregaProducto(buscaUltimo()+1);
 									//Agrega nuevo producto
 								break;
 							case 3:
@@ -110,8 +110,11 @@ int menu()
 				scanf("%s",&codigoBarra);
 				printf("Buscando el archivo...\n");
 				sleep(1);
+				int max = buscaUltimo();
 				int found = buscaProductoBarCode(codigoBarra);
-				if (found!=0)
+				printf("EL ULTIMO ES %d\n",max);
+				printf("EL ULTIMO EN PROD ES %d\n",found);
+				if ((found+1)<max)
 				{
 					buscaProductoIndex(found);
 				}
