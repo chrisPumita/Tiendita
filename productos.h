@@ -28,6 +28,8 @@ void agregaProducto(int indice);
  
 void buscaProductoIndex(int index);
 
+int buscaProductoBarCode(char bar[]);
+
 int buscaUltimo();
 
 void modificarRegistro();

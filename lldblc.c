@@ -77,6 +77,7 @@ Node* LinkedList_Search(LinkedList* this, int val)
  	return NULL; // NO Encontro el elemento, por lo tanto es NULL;
  }
 
+#if 0
 void GeneraVenta(LinkedList* this, int index)
 {
 
@@ -106,3 +107,4 @@ void GeneraVenta(LinkedList* this, int index)
 	printf("\tProductos adquiridos: %d\n",noProductos);
 	printf("\t\tTotal: $%.2f\n",totPago);
 }
+#endif

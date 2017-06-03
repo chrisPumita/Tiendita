@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "productos.h"
 #define TAM_MAX 50
 #define TAM_BAR 20
 #define FILE_NAME "lista-de-precios.dat"
+#define clear() printf("\033[H\033[J") 
 
 void leerProducto(FILE * arch, Producto* reg)
 {
@@ -77,7 +79,7 @@ Producto ingresaDatosxConsola(int indice)
 	scanf("%f",&cUni);
 
 	Producto x;
-	x.indice = indice;
+	x.indice = indice+1;
 	strcpy(x.nombre, nombre);
 	strcpy(x.barCode, barCode);
 	x.stock = stock;
@@ -152,6 +154,7 @@ void agregaProducto(int indice)
 	fread(&reg,sizeof(Producto),1,arch);
 
 	//muestro los datos de ese archivo
+	printf("Detalles del producto:\n");
 	printf("ID......: %d\n",reg.indice);
 	printf("CODIGO..: %s\n",reg.barCode);
 	printf("NOMBRE:.: %s\n",reg.nombre);
@@ -159,6 +162,40 @@ void agregaProducto(int indice)
 	printf("STOCK:..: %d\n",reg.stock);
 	printf("\n");
 	fclose(arch);
+ }
+
+  int buscaProductoBarCode(char bar[])
+ {
+	FILE* arch=fopen(FILE_NAME,"r+b");
+	Producto aux;
+	int n;
+	int index = 0; 
+
+	// ->>>> BUSCANDO DATO
+	// fread(reg,sizeof(Producto),1,arch);
+	while(fread(&aux, sizeof(aux),1,arch)!=0 && strcmp(aux.barCode,bar)!=0)
+	{
+		index++;
+		/*
+		
+		printf("INDEX NO: %d\n",index);
+		printf("%s->",aux.barCode);
+		printf("%s\n",aux.nombre);
+		 */
+	}
+	clear();
+	fclose(arch);
+      if (index<=0)
+      {
+        printf("No existe producto: %s\n",bar);
+        return 0;
+      }
+      else{
+        printf("Producto encontrado:\n");
+//		index = aux.indice;
+		return index;
+ 		}
+	// ->> END
  }
 
  int buscaUltimo()
@@ -192,9 +229,11 @@ void agregaProducto(int indice)
 	printf("Ingrese el ID a modificar: ->");
 	fflush(stdout);
 	scanf("%d",&n);
-
+	n--;
+	printf("Mostrando inforacion del ID: %d\n",n);
+	buscaProductoIndex(n);
 	//ingreso los nuevos datos por consola
-	Producto reg = ingresaDatosxConsola(n--);
+	Producto reg = ingresaDatosxConsola(n);
 
 	//Posicion del indentificaro de posicion
 	fseek(arch,n*sizeof(Producto),SEEK_SET);
