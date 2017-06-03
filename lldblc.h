@@ -77,6 +77,3 @@ Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, 
 Bool LinkedList_FindIf (LinkedList* this, int val);
 	
 Node* LinkedList_Search(LinkedList* this, int val);
-
-void GeneraVenta(LinkedList* this, int index);
-

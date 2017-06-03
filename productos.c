@@ -185,16 +185,17 @@ void agregaProducto(int indice)
 	}
 	clear();
 	fclose(arch);
-      if (index<=0)
-      {
-        printf("No existe producto: %s\n",bar);
-        return 0;
-      }
-      else{
+    if (index<=0)
+	{
+		printf("No existe producto: %s\n",bar);
+		return 0;
+	}
+    else
+    {
         printf("Producto encontrado:\n");
 //		index = aux.indice;
 		return index;
- 		}
+ 	}
 	// ->> END
  }
 

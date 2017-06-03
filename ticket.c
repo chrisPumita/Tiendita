@@ -1,20 +1,51 @@
 #include <stdio.h>
-#include <time.h>  
-#include "lldblc.h"
-#include "productos.h"
+#include <time.h>
+#include "ticket.h"
+#define FILE_NAME "lista-de-precios.dat"
+
 #define TAM_BARRA 20
 #define clear() printf("\033[H\033[J") 
 // Para limpiar pantalla
 
-void GeneraTicket(LinkedList* this, int index)
+void muestraVenta(LinkedList* this)
 {
-	index = 1;
-	clear();
+	Node * it = LinkedList_Search(this,1);
 
+		double totPago = 0.0;
+		int noProductos = 0;
+	//Comienza a generar el ticket de venta
+		printf("\E[37;41;1;33m\t████████\n");
+		printf("\E[37;41m\t  OCXO  \n");
+		printf("\E[37;41;1;33m\t████████\E[00m\n");
+		printf("\tVENTA DE MOSTRADOR\n");
+		
+		printf("| CODIGO   | CANT |    NOMBRE    |   $U   |  $TOTAL |\n");
+		printf("+--------------------------+\n");
+		while(it != NULL)
+		{
+			printf("%s",it->barra);
+			printf(" %d  ",it->cantidad );
+			printf("%s\t",it->nombre);
+			printf("$%.2f\t",it->cUni);
+			printf("$%.2f\n",it->cTotal);
+			totPago += it->cTotal;
+			noProductos += it->cantidad;
+			it = it -> siguiente;
+		}
+		printf("+--------------------------+\n");
+		printf("   Productos agregados: %d\n",noProductos);
+		printf("\t\tTotal: $%.2f\n",totPago);	
+
+}
+
+void GeneraTicket(LinkedList* this)
+{
+
+	clear();
 	//FECHA HORA
 	time_t rawtime;
 	time (&rawtime);
-	Node * it = LinkedList_Search(this,index);
+	Node * it = LinkedList_Search(this,1);
 	//Devuelve la direccion del primer nodo
 	double totPago = 0.0;
 	int noProductos = 0;
@@ -41,22 +72,135 @@ void GeneraTicket(LinkedList* this, int index)
 	printf("\t\tTotal: $%.2f\n",totPago);
 }
 
-	void agregaProducto(){
-		char codeBar[TAM_BARRA];
-		printf("Escriba codigo de barra:\n--> ");
+void agregaProductoTicket(LinkedList* ticket){
+	char codeBar[TAM_BARRA];
+	printf("Escriba codigo de barra:\n--> ");
+	scanf("%s",codeBar);
+
+	printf("Buscando el archivo...\n");
+	sleep(1);
+	
+	int n = buscaProductoBarCode(codeBar);
+	//busca en los productos
+
+	//Recupera datos
+	FILE* arch=fopen(FILE_NAME,"r+b");
+
+	//Posiciono el puntero del archivo
+	fseek(arch,n*sizeof(Producto),SEEK_SET);
+
+	//con el puntero posicionado, leo el registro
+	Producto reg;
+	fread(&reg,sizeof(Producto),1,arch);
+
+	//recupera la informacion
+	int cant = 1; //Esta cambiará
+	
+	LinkedList_Insert(ticket,n,reg.barCode,reg.nombre,cant, reg.cUni,cant*reg.cUni);
+
+	fclose(arch);
+}
+
+int nuevaVenta()
+{
+	int v = 0;
+	char codeBar[TAM_BARRA];
+	LinkedList* ticket = LinkedList_Create();
+	do
+	{
+		printf("NUEVA VENTA:\n");
+		printf("+------------------+-----------------+----------------+\n"); //Segundo Menú
+		printf("|  Quitar Producto | Proceder a Pago | Cancelar Venta |\n");
+		printf("|        [1]       |      [2]        |      [3]       |\n");
+		printf("+---------------+------------------+------------------+\n");
+		printf("Esciba codigo de barra:\n-->");
 		scanf("%s",codeBar);
+		int tamCodigo = strlen(codeBar);
+		if (tamCodigo == 1)
+		{
+			/* Eligio opc */
+			char i = codeBar[0];
+			int opc = i - 0x30;
+			printf("TAM %d\n",tamCodigo);
+			switch (opc)
+			{	
+				case 1:
+					printf("QUITAR PRODUCTO\n");
+				break;
+				case 2:
+					printf("Proceder a pago\n");
+					return 1;
+				break;
+				case 3:
+					printf("Cancelar\n");
+					return 0;
+				break;
+			}
+		}
+		else
+		{
+			/* Ingreso un codiogo grande que hay que buscar y agregar*/
+			printf("BUSCANDO PRODUCTO\n");
+			
+			int n = buscaProductoBarCode(codeBar);
+			if(n==0)
+			{
+				// No enconetro el codigo de barra
+			}
+			else
+			{
+				
+				FILE* arch=fopen(FILE_NAME,"r+b");
+				//Posiciono el puntero del archivo
+				fseek(arch,n*sizeof(Producto),SEEK_SET);
 
-		//busca en los productos
+				//con el puntero posicionado, leo el registro
+				Producto reg;
+				fread(&reg,sizeof(Producto),1,arch);
+				int cant = 1;
+				//Obteniendo la informacion del archivo
+				if (LinkedList_Insert(ticket,reg.indice,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni*cant))
+				{
+					printf("SE INGRESO PRODUCTO :)\n");
+				}
+				else
+				{
+					printf("ERROR AL INGRESAR PRODUCTO\n");
+				}
+				//LinkedList_Insert(ticket,reg.indice,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni*cant);
+				fclose(arch);
+				
+			}
+				
+		}
+		/*
+		
+				int IDProducto = 2;
+				IDProducto ++;
+				LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
+				IDProducto ++;
+				LinkedList_Insert(ticket,IDProducto,"643634","PALETA",  5,  2.0,  10.0);
+				IDProducto ++;
+		 */
+			//GeneraTicket(ticket);
+			muestraVenta(ticket);
 	}
+	while(v==0);
+	return 1;
+
+}
 
 
 
+#if 0
 int main()
 {
 
+	nuevaVenta();
+/*
 	LinkedList* ticket = LinkedList_Create ();
 	int IDProducto = 1;
-	LinkedList_Insert(ticket,IDProducto,"4352",  "COCACOLA",2, 10.0, 20.0);
+
 	IDProducto ++;
 	LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
 	IDProducto ++;
@@ -66,6 +210,8 @@ int main()
 	GeneraTicket(ticket,focus);
 	//Liberando memoria
 	LinkedList_Destroy(ticket);
+ */
 	return 0;
 	
 }
+#endif

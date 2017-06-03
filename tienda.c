@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
-#include "lldblc.h"
-#include "productos.h"
+#include "ticket.h"
+//#include "productos.h"
 #define TAM_BAR 20
 #define clear() printf("\033[H\033[J") 
 // Para limpiar pantalla
@@ -46,7 +46,6 @@ int menu()
 		{ //Opciones Primer Menú
 			
 			case 1:		//Nueva venta
-				
 				BanderaG2 = FALSE;
 				while(!BanderaG2)
 				{
@@ -54,20 +53,31 @@ int menu()
 					while(!BanderaO2)
 					{ //Se asegura de que la opción elegida este dentro del rango
 						//clear();
-						printf("+---------------+------------------+------------------+-----------------+----------------+\n"); //Segundo Menú
-						printf("| Ver Productos | Agregar Producto | Retirar Producto | Proceder a Pago | Cancelar Venta |\n");
-						printf("|      [1]      |      [2]         |      [3]         |       [4]       |      [5]       |\n");
-						printf("+---------------+------------------+------------------+-----------------+----------------+\n");
-						printf("Elija una opcion: ");
-						scanf("%d",&opcion);
-						if(opcion >= 1 && opcion <=5)
+						
+						printf("+------------------+-----------------+----------------+\n"); //Segundo Menú
+						printf("|  Quitar Producto | Proceder a Pago | Cancelar Venta |\n");
+						printf("|        [1]       |      [2]        |      [3]       |\n");
+						printf("+---------------+------------------+------------------+\n");
+						printf("Esciba codigo de barra:\n-->");
+						scanf("%s",&codigoBarra);
+						int tamCodigo = strlen(codigoBarra);
+
+						if(tamCodigo == 1)
 						{
-							BanderaO2 = TRUE; //Opcion dentro de rango
-						}
-						else{
+							//Eligio alguna opcion
+							
+							//De esas opciones verificar que sea la correcta
 							clear();
 							printf("\nOpcion no valida, intente de nuevo\n\n"); //Opcion fuera de rango
-							BanderaG2 = TRUE; //Termina el loop del segundo menú
+							BanderaO2 = TRUE; //Opcion dentro de rango
+						}
+						else
+						{
+							if(nuevaVenta()==0)
+							{
+								BanderaG2 = TRUE; //Termina el loop del segundo menú
+							}
+							
 						}
 					}
 				

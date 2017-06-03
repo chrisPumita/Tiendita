@@ -30,6 +30,7 @@
  Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, int cantidad, double cUni, double cTotal)
  {
 
+ 	printf("IGRESANDO PRODUCTO A NODO\n");
 	 Node* n = newNode (indice, barra, nombre, cantidad, cUni, cTotal);
 	 if (!n) { return FALSE; }
 	 // si es NULL devuelve FALSE
