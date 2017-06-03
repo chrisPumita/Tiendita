@@ -7,3 +7,5 @@ void GeneraTicket(LinkedList* this);
 void agregaProductoTicket(LinkedList* ticket);
 
 int nuevaVenta();
+
+void muestraVenta(LinkedList* this);

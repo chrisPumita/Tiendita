@@ -15,8 +15,8 @@
  	char barra[TAM_BARRA];
  	char nombre[TAM_TEXT];
 	int cantidad;
-	double cUni;
-	double cTotal;
+	float cUni;
+	float cTotal;
 	
 
  // datos
@@ -43,7 +43,7 @@
 //-----------------FUNCIONES PROVADAS--------------*/
 
 
- static Node* newNode (int indice, char* barra, char* nombre, int cantidad, double cUni, double cTotal)
+ static Node* newNode (int indice, char* barra, char* nombre, int cantidad, float cUni, float cTotal)
  {
  	Node* n = (Node *)malloc (sizeof (Node));
  	if (n) {
@@ -72,8 +72,10 @@ LinkedList* LinkedList_Create ();
 
 void LinkedList_Destroy (LinkedList* this);
 
-Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, int cantidad, double cUni,double cTotal);
+Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, int cantidad, float cUni,float cTotal);
 
 Bool LinkedList_FindIf (LinkedList* this, int val);
 	
 Node* LinkedList_Search(LinkedList* this, int val);
+
+void GeneraVentaLISTA(LinkedList* this, int index);

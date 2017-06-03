@@ -40,7 +40,6 @@ void muestraVenta(LinkedList* this)
 
 void GeneraTicket(LinkedList* this)
 {
-
 	clear();
 	//FECHA HORA
 	time_t rawtime;
@@ -103,9 +102,10 @@ void agregaProductoTicket(LinkedList* ticket){
 
 int nuevaVenta()
 {
-	int v = 0;
+	int v = 1;
 	char codeBar[TAM_BARRA];
-	LinkedList* ticket = LinkedList_Create();
+	LinkedList* ticket = LinkedList_Create ();
+		clear();
 	do
 	{
 		printf("NUEVA VENTA:\n");
@@ -116,9 +116,11 @@ int nuevaVenta()
 		printf("Esciba codigo de barra:\n-->");
 		scanf("%s",codeBar);
 		int tamCodigo = strlen(codeBar);
+
+		//Seleccion de la opcion en el menu
 		if (tamCodigo == 1)
 		{
-			/* Eligio opc */
+			/* Eligio opc que es de un caracter*/
 			char i = codeBar[0];
 			int opc = i - 0x30;
 			printf("TAM %d\n",tamCodigo);
@@ -139,15 +141,9 @@ int nuevaVenta()
 		}
 		else
 		{
-			/* Ingreso un codiogo grande que hay que buscar y agregar*/
-			printf("BUSCANDO PRODUCTO\n");
-			
+			/* Ingreso un codigo grande que hay que buscar y agregar*/
 			int n = buscaProductoBarCode(codeBar);
-			if(n==0)
-			{
-				// No enconetro el codigo de barra
-			}
-			else
+			if(n!=0)
 			{
 				
 				FILE* arch=fopen(FILE_NAME,"r+b");
@@ -158,10 +154,20 @@ int nuevaVenta()
 				Producto reg;
 				fread(&reg,sizeof(Producto),1,arch);
 				int cant = 1;
+
+					//muestro los datos de ese archivo
+				printf("Detalles del producto:\n");
+				printf("ID......: %d\n",reg.indice);
+				printf("CODIGO..: %s\n",reg.barCode);
+				printf("NOMBRE:.: %s\n",reg.nombre);
+				printf("COSTO:..: $%.2f\n",reg.cUni);
+				printf("STOCK:..: %d\n",reg.stock);
+				printf("\n");
 				//Obteniendo la informacion del archivo
 				if (LinkedList_Insert(ticket,reg.indice,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni*cant))
 				{
 					printf("SE INGRESO PRODUCTO :)\n");
+					GeneraVentaLISTA(ticket,1);
 				}
 				else
 				{
@@ -173,32 +179,19 @@ int nuevaVenta()
 			}
 				
 		}
-		/*
 		
-				int IDProducto = 2;
-				IDProducto ++;
-				LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
-				IDProducto ++;
-				LinkedList_Insert(ticket,IDProducto,"643634","PALETA",  5,  2.0,  10.0);
-				IDProducto ++;
-		 */
-			//GeneraTicket(ticket);
-			muestraVenta(ticket);
-	}
-	while(v==0);
-	return 1;
 
+	} while (v!=0);
+	return 1;
 }
 
 
 
-#if 0
+#if 1
 int main()
 {
-
-	nuevaVenta();
-/*
 	LinkedList* ticket = LinkedList_Create ();
+	
 	int IDProducto = 1;
 
 	IDProducto ++;
@@ -206,11 +199,15 @@ int main()
 	IDProducto ++;
 	LinkedList_Insert(ticket,IDProducto,"643634","PALETA",  5,  2.0,  10.0);
 	IDProducto ++;
+	LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
+	IDProducto ++;
+	LinkedList_Insert(ticket,IDProducto,"643634","PALETA",  5,  2.0,  10.0);
+	IDProducto ++;
 	int focus = 1;
-	GeneraTicket(ticket,focus);
+	GeneraVentaLISTA(ticket,focus);
 	//Liberando memoria
 	LinkedList_Destroy(ticket);
- */
+
 	return 0;
 	
 }

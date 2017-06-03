@@ -27,10 +27,8 @@
  }
 
 
- Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, int cantidad, double cUni, double cTotal)
+ Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, int cantidad, float cUni, float cTotal)
  {
-
- 	printf("IGRESANDO PRODUCTO A NODO\n");
 	 Node* n = newNode (indice, barra, nombre, cantidad, cUni, cTotal);
 	 if (!n) { return FALSE; }
 	 // si es NULL devuelve FALSE
@@ -78,14 +76,14 @@ Node* LinkedList_Search(LinkedList* this, int val)
  	return NULL; // NO Encontro el elemento, por lo tanto es NULL;
  }
 
-#if 0
-void GeneraVenta(LinkedList* this, int index)
+#if 1
+void GeneraVentaLISTA(LinkedList* this, int index)
 {
 
 	index = 1;
 	Node * it = LinkedList_Search(this,index);
 	//Devuelve la direccion del primer nodo
-	double totPago = 0.0;
+	float totPago = 0.0;
 	int noProductos = 0;
 	//Comienza a generar el ticket de venta
 	printf("TICKET DE VENTA\n");

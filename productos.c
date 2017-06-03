@@ -85,7 +85,6 @@ Producto ingresaDatosxConsola(int indice)
 	x.stock = stock;
 	x.cUni=cUni;
 	return x;
-
 }
 
 void DesplegarStock()
@@ -176,12 +175,6 @@ void agregaProducto(int indice)
 	while(fread(&aux, sizeof(aux),1,arch)!=0 && strcmp(aux.barCode,bar)!=0)
 	{
 		index++;
-		/*
-		
-		printf("INDEX NO: %d\n",index);
-		printf("%s->",aux.barCode);
-		printf("%s\n",aux.nombre);
-		 */
 	}
 	clear();
 	fclose(arch);

@@ -46,72 +46,9 @@ int menu()
 		{ //Opciones Primer Menú
 			
 			case 1:		//Nueva venta
+				nuevaVenta();
 				BanderaG2 = FALSE;
-				while(!BanderaG2)
-				{
-					BanderaO2 = FALSE;
-					while(!BanderaO2)
-					{ //Se asegura de que la opción elegida este dentro del rango
-						//clear();
-						
-						printf("+------------------+-----------------+----------------+\n"); //Segundo Menú
-						printf("|  Quitar Producto | Proceder a Pago | Cancelar Venta |\n");
-						printf("|        [1]       |      [2]        |      [3]       |\n");
-						printf("+---------------+------------------+------------------+\n");
-						printf("Esciba codigo de barra:\n-->");
-						scanf("%s",&codigoBarra);
-						int tamCodigo = strlen(codigoBarra);
-
-						if(tamCodigo == 1)
-						{
-							//Eligio alguna opcion
-							
-							//De esas opciones verificar que sea la correcta
-							clear();
-							printf("\nOpcion no valida, intente de nuevo\n\n"); //Opcion fuera de rango
-							BanderaO2 = TRUE; //Opcion dentro de rango
-						}
-						else
-						{
-							if(nuevaVenta()==0)
-							{
-								BanderaG2 = TRUE; //Termina el loop del segundo menú
-							}
-							
-						}
-					}
-				
 			
-					switch(opcion)
-					{
-						case 1:
-							clear();
-							DesplegarStock();
-							break;
-						case 2:
-							//AgregarProducto();
-							break;
-						case 3:
-							//RetirarProducto();
-							break;
-						case 4:
-							//GeneraVenta();
-							BanderaG1 = TRUE; //Termina el loop general
-							BanderaG2 = TRUE; //Termina el loop del segundo menú
-							return 0;
-							break;
-						case 5:
-							clear();
-							printf("La venta ha sido cancelada exitosamente\n\n");
-							BanderaG2 = TRUE; //Termina el loop del segundo menú
-							break;
-						default:
-							return 1;
-							break;
-					}
-				}
-				
-				
 				break;
 				
 			case 2:
@@ -190,10 +127,11 @@ int menu()
 }
 
  
-
+#if 0
 int main()
 {
 	int aux;
 	aux = menu();
 	return aux;
 }
+#endif
