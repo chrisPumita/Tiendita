@@ -142,13 +142,13 @@ int nuevaVenta()
 		else
 		{
 			/* Ingreso un codigo grande que hay que buscar y agregar*/
-			int n = buscaProductoBarCode(codeBar);
-			if(n!=0)
+			int IDProducto = buscaProductoBarCode(codeBar);
+			if(IDProducto!=0)
 			{
 				
 				FILE* arch=fopen(FILE_NAME,"r+b");
 				//Posiciono el puntero del archivo
-				fseek(arch,n*sizeof(Producto),SEEK_SET);
+				fseek(arch,IDProducto*sizeof(Producto),SEEK_SET);
 
 				//con el puntero posicionado, leo el registro
 				Producto reg;
@@ -156,6 +156,7 @@ int nuevaVenta()
 				int cant = 1;
 
 					//muestro los datos de ese archivo
+					/*
 				printf("Detalles del producto:\n");
 				printf("ID......: %d\n",reg.indice);
 				printf("CODIGO..: %s\n",reg.barCode);
@@ -164,10 +165,18 @@ int nuevaVenta()
 				printf("STOCK:..: %d\n",reg.stock);
 				printf("\n");
 				//Obteniendo la informacion del archivo
-				if (LinkedList_Insert(ticket,reg.indice,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni*cant))
+					*/
+	LinkedList_Insert(ticket,IDProducto,"4352",  "COCACOLA",2, 10.0, 20.0);
+	IDProducto ++;
+	LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
+	IDProducto ++;
+	LinkedList_Insert(ticket,IDProducto,"643634","PALETA",  5,  2.0,  10.0);
+				Bool SUCCES = LinkedList_Insert(ticket,reg.indice,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni);
+				if (SUCCES)
 				{
-					printf("SE INGRESO PRODUCTO :)\n");
-					GeneraVentaLISTA(ticket,1);
+					int focus = 1;
+					GeneraVentaLISTA(ticket,focus);
+					LinkedList_Destroy(ticket);
 				}
 				else
 				{
@@ -190,14 +199,12 @@ int nuevaVenta()
 #if 1
 int main()
 {
-	LinkedList* ticket = LinkedList_Create ();
+nuevaVenta();
+	/*
 	
+	LinkedList* ticket = LinkedList_Create ();
 	int IDProducto = 1;
-
-	IDProducto ++;
-	LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
-	IDProducto ++;
-	LinkedList_Insert(ticket,IDProducto,"643634","PALETA",  5,  2.0,  10.0);
+	LinkedList_Insert(ticket,IDProducto,"4352",  "COCACOLA",2, 10.0, 20.0);
 	IDProducto ++;
 	LinkedList_Insert(ticket,IDProducto,"54353", "SABRITAS",1,  8.0,  8.0);
 	IDProducto ++;
@@ -207,6 +214,7 @@ int main()
 	GeneraVentaLISTA(ticket,focus);
 	//Liberando memoria
 	LinkedList_Destroy(ticket);
+	 */
 
 	return 0;
 	
