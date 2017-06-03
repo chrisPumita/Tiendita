@@ -24,13 +24,13 @@ int menu()
 			printf("\E[37;41;5m\t  OTZO  \E[00m\n");
 			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
 			printf("   ->PUNTO DE VENTA\n");
-			printf("\E[1;8m+------------+-------------+------------|---------+\n"); //Primer Menú
-			printf("\E[1;8m|NUEVA VENTA:| ADMINISTRAR |  CONSULTA  |  SALIR  |\n");
-			printf("\E[1;8m|     [1]    |     [2]     |     [3]    |   [0]   |\n");
-			printf("\E[1;8m+------------+-------------+------------+---------|\n");
+			printf("\E[1;8m+------------+-------------+------------|----------|--------+\n"); //Primer Menú
+			printf("\E[1;8m|NUEVA VENTA:| ADMINISTRAR |  CONSULTA  | CRÉDITOS | SALIR  |\n");
+			printf("\E[1;8m|     [1]    |     [2]     |     [3]    |    [4]   |   [0]  |\n");
+			printf("\E[1;8m+------------+-------------+------------+----------|........|\n");
 			printf("\E[0;34mElija una opcion: \E[00m");
 			scanf ("%d", &opcion);
-			if(opcion == 0 || opcion == 1||opcion == 2||opcion == 3)
+			if(opcion == 0 || opcion == 1||opcion == 2||opcion == 3||opcion == 4)
 			{
 				BanderaO1 = TRUE; //Opcion dentro de rango
 			}
@@ -83,7 +83,7 @@ int menu()
 								DesplegarStock();
 								break;
 							case 2:
-									printf("Se asgnara ID: %d\n",buscaUltimo()+1);
+									//printf("Se asgnara ID: %d\n",buscaUltimo()+1);
 									agregaProducto(buscaUltimo()+1);
 									//Agrega nuevo producto
 								break;
@@ -109,22 +109,41 @@ int menu()
 				printf("Ingrese Código de Barra: ->");
 				scanf("%s",&codigoBarra);
 				printf("Buscando el archivo...\n");
-				sleep(1);
+				clear();
+				int c=1,d=1;
+				for(c=1;c<=32767;c++){
+					for(d=1;d<=22767;d++){
+					}
+				}
 				int max = buscaUltimo();
 				int found = buscaProductoBarCode(codigoBarra);
-				printf("EL ULTIMO ES %d\n",max);
-				printf("EL ULTIMO EN PROD ES %d\n",found);
-				if ((found+1)<max)
+				if ((found+1)<=max)
 				{
 					buscaProductoIndex(found);
 				}
 				else
 				{
-					printf("NO ENCONTRO EL ARHIVO\n");
+					printf("NO ENCONTRO EL PRODUCTO\n");
 				}
 				BanderaG2 = TRUE; //Termina el loop del segundo menú
 				break;
 			case 4: 	//Salir
+			clear();
+				int o=1;
+				while(o!=0)
+				{
+				printf("\n\n\n");
+				printf("\E[0;4;37;41;1;33m\t\tC R E D I T O S:\E[00m\n\n");
+				printf("\E[43;5;1;32;8m\tPROGRAMADOR: Pioquinto Hernandez Christian René  \E[00m  ");
+				printf("\E[1;42m  \E[00m\E[37;41m▓▓\E[00m\E[37;41m  \E[00m  \n\t\t\E[1;42mHecho\E[00m\E[1;37;47;0men\E[00m\E[37;41mMéxico\E[00m\n");
+					printf("ESCRIBA 0 PARA REGRESAR\n");
+					scanf("%d",&o);
+					BanderaG2 = TRUE; //Termina el loop general
+					clear();
+				}
+
+				break;
+			case 5: 	//Salir
 				printf("\nGracias por su visita, vuelva pronto\n\n");
 				BanderaG1 = TRUE; //Termina el loop general
 				return 0;

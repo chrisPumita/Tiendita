@@ -5,7 +5,7 @@
 #define TAM_BAR 20
 
 /**
- * 
+ * Esta estructura contiene la información de los productos
  */
  struct Producto_Type
  {
@@ -18,69 +18,69 @@
  typedef struct Producto_Type Producto;
 
 /**
- * [leerProducto description]
- * @param arch [description]
- * @param reg  [description]
+ * [Leen el producto de el archivo binario]
+ * @param arch [Es el archivo binario]
+ * @param reg  [Es la estructura tipo Producto]
  */
 void leerProducto(FILE * arch, Producto* reg);
 
 /**
- * [grabaProducto description]
- * @param arch [description]
- * @param reg  [description]
+ * [Ingresa el producto en el archivo binario]
+ * @param arch [Es el archivo binario]
+ * @param reg  [Es la estructura tipo Producto]
  */
 void grabaProducto(FILE* arch, Producto* reg);
 
 /**
- * [creaProducto description]
- * @param  indice  [description]
- * @param  nombre  [description]
- * @param  barCode [description]
- * @param  stock   [description]
- * @param  cUni    [description]
- * @return         [description]
+ * [Crea la estructura Producto]
+ * @param  indice   [Es el número del producto con respecto a los demás]
+ * @param  nombre   [Nombre del producto]
+ * @param  barra    [Es el número que se lee del código de barras]
+ * @param  cantidad [Cantidad en inventario del producto]
+ * @param  cUni     [Costo unitario del producto seleccionado]
+ * @return          [Regresa una estructura tipo Producto]
  */
 Producto creaProducto(int indice, char nombre[], char barCode[], int stock, float cUni);
 
 /**
- * [ingresaDatosxConsola description]
+ * [Ingresa el producto en la consola]
  * @param  indice [description]
  * @return        [description]
  */
 Producto ingresaDatosxConsola(int indice);
 
 /**
- * [DesplegarStock description]
+ * [Muestra el inventario]
  */
 void DesplegarStock();
 
 /**
- * [agregaProducto description]
- * @param indice [description]
+ * [Agrega un producto al inventario]
+ * @param indice [Número del producto con respecto a los otros]
  */
 void agregaProducto(int indice);
 
 /**
- * [buscaProductoIndex description]
- * @param index [description]
+ * [Muestra la información del producto]
+ * @param index [Número del producto con respecto a los otros]
  */
 void buscaProductoIndex(int index);
 
 /**
- * [buscaProductoBarCode description]
- * @param  bar [description]
- * @return     [description]
+ * [Busca un producto de acuerdo a su barcode]
+ * @param  bar [Es el número del código de barra]
+ * @return     [Regresa el index del producto]
  */
 int buscaProductoBarCode(char bar[]);
 
 /**
- * [buscaUltimo description]
- * @return [description]
+ * [Devuelve el último índice]
+ * @return [Regresa el último índice]
  */
 int buscaUltimo();
 
 /**
- * [modificarRegistro description]
+ * [Modifica el producto seleccionado]
  */
 void modificarRegistro();
  

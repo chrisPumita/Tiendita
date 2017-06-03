@@ -152,6 +152,8 @@ int nuevaVenta()
 				case 1:
 					printf("QUITAR PRODUCTO\n");
 					//f(x) remueve Nodo
+					LinkedList_Remove(ticket);
+					muestraVenta(ticket);
 				break;
 				case 2:
 					clear();

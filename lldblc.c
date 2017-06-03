@@ -26,6 +26,17 @@
  // devuelve la memoria asignada a la lista
  }
 
+ void LinkedList_Remove (LinkedList* this)
+ {
+		 while (this->first != NULL) 
+	 {
+		 Node* tmp = this->first->siguiente;
+		 deleteNode (this->first);
+		 this->first = tmp;
+		 break;
+	 }
+}
+
 
  Bool LinkedList_Insert (LinkedList* this,int indice, char* barra, char* nombre, int cantidad, float cUni, float cTotal)
  {
