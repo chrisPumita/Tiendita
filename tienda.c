@@ -21,7 +21,7 @@ int menu()
 		while(!BanderaO1)
 		{ //Se asegura de que la opción elegida este dentro del rango
 			printf("\E[37;41;5;1;33m\t████████\n");
-			printf("\E[37;41;5m\t  OCXO  \n");
+			printf("\E[37;41;5m\t  OTZO  \n");
 			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
 			printf("   ->PUNTO DE VENTA\n");
 			printf("\E[1;8m+------------+-------------+------------|---------+\n"); //Primer Menú
@@ -110,8 +110,15 @@ int menu()
 				scanf("%s",&codigoBarra);
 				printf("Buscando el archivo...\n");
 				sleep(1);
-
-				buscaProductoIndex(buscaProductoBarCode(codigoBarra));
+				int found = buscaProductoBarCode(codigoBarra);
+				if (found!=0)
+				{
+					buscaProductoIndex(found);
+				}
+				else
+				{
+					printf("NO ENCONTRO EL ARHIVO\n");
+				}
 				BanderaG2 = TRUE; //Termina el loop del segundo menú
 				break;
 			case 4: 	//Salir
@@ -127,7 +134,7 @@ int menu()
 }
 
  
-#if 0
+#if 1
 int main()
 {
 	int aux;

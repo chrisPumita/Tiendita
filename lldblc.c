@@ -76,7 +76,7 @@ Node* LinkedList_Search(LinkedList* this, int val)
  	return NULL; // NO Encontro el elemento, por lo tanto es NULL;
  }
 
-#if 1
+#if 0
 void GeneraVentaLISTA(LinkedList* this, int index)
 {
 
@@ -86,7 +86,7 @@ void GeneraVentaLISTA(LinkedList* this, int index)
 	float totPago = 0.0;
 	int noProductos = 0;
 	//Comienza a generar el ticket de venta
-	printf("TICKET DE VENTA\n");
+	printf("VENTA DE MOSTRADOR\n");
 	printf("31 de Mayo de 2017\n");
 	printf("Codigo\tNombre\tCant\t$U\t$T\n");
 	printf("+--------------------------+\n");

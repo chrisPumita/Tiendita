@@ -18,7 +18,6 @@
 	float cUni;
 	float cTotal;
 	
-
  // datos
  	struct Node_Type* siguiente;
  // apuntador al siguiente nodo
@@ -78,4 +77,4 @@ Bool LinkedList_FindIf (LinkedList* this, int val);
 	
 Node* LinkedList_Search(LinkedList* this, int val);
 
-void GeneraVentaLISTA(LinkedList* this, int index);
+//void GeneraVentaLISTA(LinkedList* this, int index);
