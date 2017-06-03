@@ -7,6 +7,9 @@
 #ifndef Bool_h
 #define Bool_h
 
+/**
+ * 
+ */
 enum {FALSE = 0, TRUE = !0};
 typedef unsigned int Bool;
 
