@@ -16,12 +16,12 @@ void muestraVenta(LinkedList* this)
 	//Comienza a generar el ticket de venta
 		printf("\n");
 		printf("\E[37;41;1;33m\t████████████\E[00m\n");
-		printf("\E[37;41m\t    OCXO    \E[00m\tVENTA DE MOSTRADOR\n");
+		printf("\E[37;41m\t    OTZO    \E[00m\tVENTA DE MOSTRADOR\n");
 		printf("\E[37;41;1;33m\t████████████\E[00m\n");
 		printf("\n");
 		
 		printf("| CODIGO   |  CANT  |     NOMBRE     |   $U   |  $TOTAL |\n");
-		printf("+--------------------------+\n");
+		printf("+-------------------------------------------------------------+\n");
 		while(it != NULL)
 		{
 			printf("%s\t\t",it->barra);
@@ -33,8 +33,8 @@ void muestraVenta(LinkedList* this)
 			noProductos += it->cantidad;
 			it = it -> siguiente;
 		}
-		printf("+--------------------------+\n");
-		printf("   Productos agregados: %d\n",noProductos);
+		printf("+-------------------------------------------------------------+\n");
+		printf("    Productos agregados: %d",noProductos);
 		printf("\t\tTotal: $%.2f\n",totPago);	
 
 }
@@ -55,11 +55,11 @@ void GeneraTicket(LinkedList* this, float pago)
 	printf("\E[37;41;1;33m\t████████\E[00m\n");
 	printf("\n");
 	printf(" Av. de seven eleven\n");
-	printf("RFC AD010120QGMS\n");
-	printf("\tTICKET DE VENTA\n");
+	printf("   RFC AD010120QGMS\n");
+	printf("    TICKET DE VENTA\n");
 	printf("%s\n",ctime (&rawtime));
 	printf("Cant  Nombre\t$U\t$T\n");
-	printf("+--------------------------+\n");
+	printf("+-----------------------------+\n");
 	while(it != NULL)
 	{
 		printf("  %d  ",it->cantidad );
@@ -70,26 +70,21 @@ void GeneraTicket(LinkedList* this, float pago)
 		noProductos += it->cantidad;
 		it = it -> siguiente;
 	}
-	printf("+--------------------------+\n");
-	printf("   Productos adquiridos: %d\n",noProductos);
+	printf("+-----------------------------+\n");
+	printf("Productos adquiridos: %d\n",noProductos);
 	//float cambio(float precio, float pago)
-	printf("\t\t  Total:...$%.2f\n",totPago);
-	printf("\t\tSu Pago:...$%.2f\n",pago);
-	printf("\t\t Cambio:...$%.2f\n",cambio(totPago,pago));
+	printf("\t  Total:...$%.2f\n",totPago);
+	printf("\tSu Pago:...$%.2f\n",pago);
+	//float cambio(float precio, float pago)
+	printf("\t Cambio:...$%.2f\n",cambio(totPago,pago));
 	printf("\n");
-	printf("GRACIAS POR SU COMPRA\n");
-	printf("      -------o0o-------\n");
+	printf("    GRACIAS POR SU COMPRA\n");
+	printf("     -------o0o-------\n");
 }
 
-void agregaProductoTicket(LinkedList* ticket){
-	char codeBar[TAM_BARRA];
-	printf("Escriba codigo de barra:\n--> ");
-	scanf("%s",codeBar);
-
-	printf("Buscando el archivo...\n");
-	sleep(1);
+Bool agregaProductoTicket(LinkedList* ticket, char codigoBarra[]){
 	
-	int n = buscaProductoBarCode(codeBar);
+	int n = buscaProductoBarCode(codigoBarra);
 	//busca en los productos
 
 	//Recupera datos
@@ -101,6 +96,7 @@ void agregaProductoTicket(LinkedList* ticket){
 	//con el puntero posicionado, leo el registro
 	Producto reg;
 	fread(&reg,sizeof(Producto),1,arch);
+	fclose(arch);
 
 	//recupera la informacion
 	int cant = 1; //Esta cambiará
@@ -110,35 +106,20 @@ void agregaProductoTicket(LinkedList* ticket){
 	if (nodoFound)
 	{
 		Node* nodo = LinkedList_Search(ticket,n);
-		printf("ENCONTRO UN ELEMENTO IGUAL\n");
-		cant = nodo->cantidad + 1;
+		nodo->cantidad++;
+		nodo->cTotal = nodo->cUni*nodo->cantidad;
+		return TRUE;
+	}else
+	{
+		Bool value = LinkedList_Insert(ticket,n,reg.barCode,reg.nombre,cant, reg.cUni,cant*reg.cUni);
+		return TRUE;
 	}
 
-	LinkedList_Insert(ticket,n,reg.barCode,reg.nombre,cant, reg.cUni,cant*reg.cUni);
-
-	fclose(arch);
 }
 
-float cambio(float precio, float pago)
+float cambio(float total, float pago)
 { 	
-	/*
-	float pago, cambio; 
-	Bool banpag = FALSE;  
-	while(!banpag)
-	{ 	 	
-	printf("\nEl total a pagar es %f.2", precio); 	
-	printf("\nIngrese el pago: "); 	
-	scanf("%f",pago); 	 	
-	if(total <= pago){ 		
-	cambio = cambio(total, pago); 		
-	banpag = TRUE; 	} 	
-	else{ 		clear(); 		
-	printf("\nEl pago es menor al total, intente de nuevo:"); 	
-	} 
-	} 
-	printf("\nLa transaccion fue exitosa\n");
-	 */
-	return pago - precio; 
+	return pago-total;
 }
 
 int nuevaVenta()
@@ -158,7 +139,7 @@ int nuevaVenta()
 		printf("Escriba código de barra:\n-->");
 		scanf("%s",codeBar);
 		int tamCodigo = strlen(codeBar);
-
+		clear();
 		//Seleccion de la opcion en el menu
 		if (tamCodigo == 1)
 		{
@@ -173,6 +154,7 @@ int nuevaVenta()
 					//f(x) remueve Nodo
 				break;
 				case 2:
+					clear();
 					printf("Proceder a pago\nIngrese cantidad su pago:\n-->");
 					float tuPago;
 					scanf("%f",&tuPago);
@@ -195,9 +177,9 @@ int nuevaVenta()
 		{
 			/* Ingreso un codigo grande que hay que buscar y agregar*/
 			int IDProducto = buscaProductoBarCode(codeBar);
-			if(IDProducto!=0)
+			if(IDProducto>0)
 			{
-				
+        		//printf("Producto encontrado:\n");
 				FILE* arch=fopen(FILE_NAME,"r+b");
 				//Posiciono el puntero del archivo
 				fseek(arch,IDProducto*sizeof(Producto),SEEK_SET);
@@ -209,9 +191,9 @@ int nuevaVenta()
 
 				//Obteniendo la informacion del archivo
 				 
-				Bool SUCCES = TRUE;
-				//Bool SUCCES = 
-				LinkedList_Insert(ticket,IDProducto,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni);
+				Bool SUCCES = agregaProductoTicket(ticket,codeBar);
+				fclose(arch);
+				//Bool SUCCES = LinkedList_Insert(ticket,IDProducto,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni);
 				if (SUCCES)
 				{
 					muestraVenta(ticket);
@@ -221,12 +203,14 @@ int nuevaVenta()
 					printf("ERROR AL INGRESAR PRODUCTO\n");
 				}
 				//LinkedList_Insert(ticket,reg.indice,reg.barCode,reg.nombre,  cant,  reg.cUni,  reg.cUni*cant);
-				fclose(arch);
-				
+			}
+			else
+			{
+				printf("NO EXISTE PRODUCTO\n");
+				muestraVenta(ticket);
 			}
 				
-		}
-		
+		}		
 
 	} while (v!=0);
 	LinkedList_Destroy(ticket);

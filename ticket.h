@@ -12,7 +12,7 @@ void GeneraTicket(LinkedList* this, float pago);
  * [agregaProductoTicket description]
  * @param ticket [description]
  */
-void agregaProductoTicket(LinkedList* ticket);
+Bool agregaProductoTicket(LinkedList* ticket, char codigoBarra[]);
 /**
  * [cambio description]
  * @param  precio [description]

@@ -166,33 +166,20 @@ void agregaProducto(int indice)
  {
 	FILE* arch=fopen(FILE_NAME,"r+b");
 	Producto aux;
-	int n;
 	int index = 0;
-	Bool found = FALSE;
-
 	// ->>>> BUSCANDO DATO
 	// fread(reg,sizeof(Producto),1,arch);
 	while(fread(&aux, sizeof(aux),1,arch)!=0 && strcmp(aux.barCode,bar)!=0)
 	{
-		if (strcmp(aux.barCode,bar)!=0)
-		{
-			found = TRUE;
-		}
 		index++;
 	}
+	//printf("altumo %d index%d\n",buscaUltimo(), index );
 	//clear();
 	fclose(arch);
-    if (found != TRUE)
-	{
-		printf("No existe producto: %s\n",bar);
+	if(buscaUltimo()<=index)
 		return 0;
-	}
-    else
-    {
-        printf("Producto encontrado:\n");
-//		index = aux.indice;
-		return index;
- 	}
+	else
+	return index;
 	// ->> END
  }
 

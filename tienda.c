@@ -20,8 +20,8 @@ int menu()
 		BanderaO1 = FALSE;
 		while(!BanderaO1)
 		{ //Se asegura de que la opción elegida este dentro del rango
-			printf("\E[37;41;5;1;33m\t████████\n");
-			printf("\E[37;41;5m\t  OTZO  \n");
+			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
+			printf("\E[37;41;5m\t  OTZO  \E[00m\n");
 			printf("\E[37;41;5;1;33m\t████████\E[00m\n");
 			printf("   ->PUNTO DE VENTA\n");
 			printf("\E[1;8m+------------+-------------+------------|---------+\n"); //Primer Menú
